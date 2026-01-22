@@ -3,7 +3,6 @@ import random as random
 from enerxias import E_spin
 
 def metropolis(spins, ady, k, T, J):
-    N=int(np.sqrt(len(spins)))
     #posicion do spin seleccionado
     posicion = np.random.randint(0, len(spins))
         
