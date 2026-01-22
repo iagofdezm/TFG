@@ -4,7 +4,7 @@ from lectura_datos import gardar_rede
 #Número de spins: N2
 N=50
 #Posibles estados de spin
-k=[-1, 1]
+k=[-1, 1, -1]
 #Temperatura
 T=0.5
 #Factor de interacción

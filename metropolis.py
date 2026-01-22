@@ -8,15 +8,21 @@ def metropolis(spins, ady, k, T, J):
     posicion = np.random.randint(0, len(spins))
         
     s = spins[posicion] #valor do spin seleccionado
-    Es=E_spin(posicion, spins, ady, J) #enerxía debido ó spin seleccionado
+    Es = E_spin(posicion, spins, ady, J) #enerxía debido ó spin seleccionado
     sn = random.choice(k) #valor novo do spin
-    deltaE = Es*(sn/s-s) #variación da enerxía
+
+    spins[posicion]=sn 
+    Esn = E_spin(posicion, spins, ady, J)
+    
+    deltaE = Esn-Es #variación da enerxía
 
     if deltaE<0:
-        spins[posicion]=sn
+        return spins
     elif np.exp(-deltaE/T)>random.random():
-        spins[posicion]=sn
-    return spins
+        return spins
+    else:
+        spins[posicion]=s        
+        return spins
 
 
 

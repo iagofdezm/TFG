@@ -1,0 +1,20 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Archivos de entorno virtual
+venv/
+.env/
+.venv/
+
+# Archivos de Jupyter
+.ipynb_checkpoints/
+
+# Archivos grandes o temporales
+*.npz
+*.npy
+*.csv
+
+# Carpetas de VSCode
+.vscode/
