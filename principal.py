@@ -9,7 +9,7 @@ from configuracion_inicial import N, k, T, J
 
 spins, ady = ler_rede('configuracion_inicial.npz')
 
-T=1
+T=1.75
 
 vm = [] #vector con magnetización para distinto t
 t = [] #vector con pasos temporais
@@ -28,5 +28,5 @@ for i in range(pasos*N*N):
 
 vm=np.array(vm)/(N*N)
 t=np.array(t)/t[-1]
-np.savetxt("t-1.csv", vm, delimiter=",")
+np.savetxt("t3.csv", vm, delimiter=",")
 #np.savetxt("tempo.csv", t, delimiter=",")
