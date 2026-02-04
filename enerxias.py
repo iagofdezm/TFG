@@ -6,10 +6,8 @@ def enerxia_total(spins, ady, J):
     for i in range(len(spins)):
         s = spins[i]
         vec = ady[i] #Posición dos veciños
-        svec=0 #Contador do spin dos veciños
         for j in vec:
-            svec=svec+spins[j]
-        E = E - J*s*svec
+            E = E - J*np.cos(spins[i]-spins[j])
     return E/2.0
 
 def E_spin(posicion, spins, ady, J):

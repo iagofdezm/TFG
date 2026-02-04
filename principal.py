@@ -21,7 +21,6 @@ def simular(T):
         spins=metropolis(spins, ady, k, T, J)
 
         if i%(g*N*N)==0:
-
             m=np.sum(spins)
             vm.append(m)
             gspins.append(spins)
@@ -29,7 +28,7 @@ def simular(T):
             print(i/(g*N*N))
     vm=np.array(vm)/(N*N)
     t=np.array(t)/t[-1]
-    np.savetxt("t3.csv", vm, delimiter=",")
-    np.savetxt('spins.csv', gspins, delimeter=',')
-    np.savetxt("tempo.csv", t, delimiter=",")
+    np.savetxt(f"magnetizacion_{T}.csv", vm, delimiter=",")
+    gardar_spins(gspins, 'spins_{T}.csv')
+    np.savetxt(f"tempo_{T}.csv", t, delimiter=",")
     return None

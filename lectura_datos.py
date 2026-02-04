@@ -10,3 +10,7 @@ def ler_rede(nome_arquivo):
 def gardar_rede(spins, ady, nome_arquivo): 
     ady_obj = np.array(ady, dtype=object)
     return np.savez(nome_arquivo, spins=spins, ady=ady_obj, allow_pickle=True)
+
+#Gardado da configuración actual de spins
+def gardar_spins(spins, nome_arquivo):
+    return np.savez(nome_arquivo, spins=spins)
