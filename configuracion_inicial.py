@@ -5,8 +5,7 @@ from lectura_datos import gardar_rede
 N=50
 #Posibles estados de spin
 k=[-1, 1]
-#Temperatura
-T=0.5
+
 #Factor de interacción
 J=1
 
@@ -22,17 +21,13 @@ def adyacencia(N):
             #k: índice no vector 1D
             k=i*N+j
             #Veciño arriba
-            if i>0:
-                v[k].append((i-1)*N+j)
+            v[k].append(((i-1)%N)*N+j)
             #Veciño abaixo
-            if i<N-1:
-                v[k].append((i+1)*N+j)
+            v[k].append(((i+1)%N)*N+j)
             #Veciño esquerda
-            if j>0:
-                v[k].append(i*N+(j-1))
+            v[k].append(i*N+(j-1)%N)
             #Veciño dereita
-            if j<N-1:
-                v[k].append(i*N+(j+1))
+            v[k].append(i*N+(j+1)%N)
     return v
 
 #Vector de adyacencia
