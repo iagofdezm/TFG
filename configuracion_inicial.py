@@ -1,10 +1,14 @@
 import numpy as np
-from lectura_datos import gardar_spins, gardar_ady
+from lectura_datos import gardar_spins, gardar_adx
 
 #Número de spins: N2
 N=50
 #Posibles estados de spin
-k=[0, np.pi]
+k=[]
+q=2
+for i in range(q):
+    k.append(2*np.pi*i/q)
+
 
 #Factor de interacción
 J=1
@@ -13,7 +17,7 @@ J=1
 spins=np.random.choice(k, N*N)
 
 
-def adyacencia(N):
+def crea_adx(N):
     #Consideramos interaccións a primeiros veciños
     v=[[] for _ in range(N*N)]
     for i in range(N):
@@ -32,9 +36,9 @@ def adyacencia(N):
 
 #Vector de adyacencia
 '''
-ady = adyacencia(N)
+adx = crea_adx(N)
 
-gardar_ady(ady, 'adyacencia')
+gardar_adx(adx, 'adx')
 gardar_spins(spins, 'configuracion_actual')
 '''
 
