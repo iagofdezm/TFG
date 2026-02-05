@@ -1,5 +1,5 @@
 import numpy as np
-from lectura_datos import gardar_rede
+from lectura_datos import gardar_spins, gardar_ady
 
 #Número de spins: N2
 N=50
@@ -31,7 +31,10 @@ def adyacencia(N):
     return v
 
 #Vector de adyacencia
+'''
 ady = adyacencia(N)
 
-gardar_rede(spins, ady, 'configuracion_inicial')
+gardar_ady(ady, 'adyacencia')
+gardar_spins(spins, 'configuracion_actual')
+'''
 

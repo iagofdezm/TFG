@@ -3,11 +3,14 @@ import random as random
 from enerxias import E_spin
 from enerxias import enerxia_total
 from metropolis import metropolis
-from lectura_datos import ler_rede
-from lectura_datos import gardar_rede
+from lectura_datos import ler_spins, ler_adyacencia
+from lectura_datos import gardar_spins, gardar_ady
 from configuracion_inicial import N, k, J
 
-spins, ady = ler_rede('configuracion_inicial.npz')
+'''
+spins=ler_spins('configuracion_actual')
+ady=ler_adyacencia('adyacencia')
+'''
 
 def simular(T):
     vm = [] #vector con magnetización para distinto t
@@ -21,8 +24,6 @@ def simular(T):
         spins=metropolis(spins, ady, k, T, J)
 
         if i%(g*N*N)==0:
-            m=np.sum(spins)
-            vm.append(m)
             gspins.append(spins)
             t.append(i)
             print(i/(g*N*N))
@@ -32,3 +33,5 @@ def simular(T):
     gardar_spins(gspins, 'spins_{T}.csv')
     np.savetxt(f"tempo_{T}.csv", t, delimiter=",")
     return None
+
+
