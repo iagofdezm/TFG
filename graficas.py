@@ -1,15 +1,13 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from lectura_datos import ler_adx, ler_spins
+from enerxias import magnetizacion
 
-magnetizacions={}
-for i in range(3):
-    magnetizacions[f't_{i+1}']= np.loadtxt(f"t{i+1}.csv", delimiter=",")
 
-tempo=np.loadtxt('tempo.csv')
+spins = ler_spins('configuracion_actual.npz')
+adx = ler_adx('adx.npz')
 
-for i in range(3):
-    plt.plot(tempo, magnetizacions[f't_{i+1}'], label=f't_{i+1}')
-plt.xlabel('Pasos temporais')
-plt.ylabel('Enerxía/Enerxía máxima')
-plt.legend()
-plt.show()
+m = magnetizacion(spins, adx, J=1)
+print(m)
+
+

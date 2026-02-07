@@ -35,10 +35,9 @@ def crea_adx(N):
     return v
 
 #Vector de adyacencia
-'''
 adx = crea_adx(N)
 
 gardar_adx(adx, 'adx')
 gardar_spins(spins, 'configuracion_actual')
-'''
+
 
