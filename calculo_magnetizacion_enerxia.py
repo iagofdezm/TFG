@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 adx = ler_adx('adx.npz')
 
-temperaturas=np.linspace(0.00001, 3, 20)
+temperaturas=np.linspace(0.001, 3, 5)
 
 ms = {}
 
@@ -23,9 +23,7 @@ for T in temperaturas:
     ms[f'temp_{T:.1f}'] = m
 i=0
 for nombre, valores in ms.items():
-    i=i+1
-    if i%4==0:
-        plt.plot(valores, label=nombre)
+    plt.plot(valores, label=nombre)
 plt.xlabel('Tempo')
 plt.ylabel('Magnetización')
 plt.legend()

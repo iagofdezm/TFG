@@ -16,7 +16,7 @@ def simular(T, spins, adx):
     t = [] #vector con pasos temporais
     gspins = [] #vector coas configuracións do sistema
 
-    pasos = 10000 #pasos de simulación
+    pasos = 1000 #pasos de simulación
     g=10 #distancia entre valores de m
     for i in range(pasos*N*N):
         spins=metropolis(spins, adx, k, T, J)
@@ -30,9 +30,10 @@ def simular(T, spins, adx):
     np.savetxt(f"tempo_{T:.1f}.npz", t, delimiter=",")
     return None
 
-temperaturas=np.linspace(0.00001, 3, 20)
+temperaturas=np.linspace(0.001, 3, 5)
 
 for T in temperaturas:
+    spins=ler_spins('configuracion_actual.npz')
     simular(T, spins, adx)
     print('Simulación rematada')
 
