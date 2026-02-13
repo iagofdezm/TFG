@@ -1,6 +1,6 @@
 import numpy as np
 from lectura_datos import ler_adx, ler_spins
-from enerxias import magnetizacion, enerxia_total
+from enerxias import magnetizacion
 import matplotlib.pyplot as plt
 
 

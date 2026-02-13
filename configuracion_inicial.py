@@ -38,6 +38,6 @@ def crea_adx(N):
 adx = crea_adx(N)
 
 gardar_adx(adx, 'adx')
-gardar_spins(spins, 'configuracion_actual')
+gardar_spins(spins, 'configuracion_inicial')
 
 

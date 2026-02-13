@@ -10,14 +10,6 @@ def enerxia_total(spins, adx, J):
             E = E - J*np.cos(s-spins[j])
     return E/2.0
 
-def E_spin(posicion, spins, adx, J):
-    E=0 #Inicialización da variable
-    #A posición será o índice no vector 1D
-    s=spins[posicion]
-    vec = adx[posicion] #Posición dos veciños
-    for j in vec:
-        E = E - J*np.cos(s-spins[j])
-    return E
 
 def magnetizacion(spins, adx, J=1):
     N2 = len(spins)
