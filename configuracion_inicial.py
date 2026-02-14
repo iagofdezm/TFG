@@ -1,5 +1,6 @@
 import numpy as np
 from lectura_datos import gardar_spins, gardar_adx
+import os
 
 #Número de spins: N2
 N=50
@@ -37,7 +38,10 @@ def crea_adx(N):
 #Vector de adyacencia
 adx = crea_adx(N)
 
-gardar_adx(adx, 'adx')
-gardar_spins(spins, 'configuracion_inicial')
+ruta_spins = os.path.join('datos', f'q{q}', 'configuracion_inicial')
+ruta_adx = os.path.join('datos', f'q{q}', 'adx')
+
+gardar_adx(adx, ruta_adx)
+gardar_spins(spins, ruta_spins)
 
 

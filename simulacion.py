@@ -9,44 +9,41 @@ from configuracion_inicial import N, k, J
 
 def equilibrar(T_final, spins, adx, q):
     T = 4
-    t = [] #vector con pasos temporais
-
+    '''
     enerxias = [] #vector coas enerxías
     magnetizacions = [] #vector coas magnetizacións
-
-    pasos = 10000 #pasos de simulación
+    '''
+    pasos = 5000 #pasos de simulación
     g=20 #distancia entre valores de m
     for i in range(pasos*N*N):
         spins=metropolis(spins, adx, k, T, J)
-
+        
         if i%(g*N*N)==0:
+            
             #Enfriamento
-            T = max(T_final, 0.99*T)
+            T = max(T_final, 0.97*T)
+            '''
             #Cálculo e gardado da magnetización
             m = magnetizacion(spins, adx, J=1)
             magnetizacions.append(m)
             #Cálculo e gardado da enerxía
             enerxia = enerxia_total(spins, adx, J=1)
             enerxias.append(enerxia)
+            '''
 
-            t.append(i)
             print(i/(g*N*N), '/', pasos)
-    t=np.array(t)/t[-1]
-    
-    archivom = f"magnetizacion_{T:.1f}.npz"
+    '''
+    archivom = f"magnetizacion_{T:.3f}.npz"
     rutam = os.path.join(q, archivom)
 
-    archivoe = f"enerxia_{T:.1f}.npz"
+    archivoe = f"enerxia_{T:.3f}.npz"
     rutae = os.path.join(q, archivoe)
     
-    archivot = f"tempo_{T:.1f}.npz"
-    rutat = os.path.join(q, archivot)
 
     np.savetxt(rutam, magnetizacions, delimiter=",")
     np.savetxt(rutae, enerxias, delimiter=",")
-    np.savetxt(rutat, t, delimiter=",")
-
-    archivos = f'configuracion_equlibrada_{T:.1f}.npz'
+    '''
+    archivos = f'configuracion_equilibrada_{T:.4f}.npz'
     rutas = os.path.join(q, archivos)
 
     gardar_spins(spins, rutas)
@@ -54,19 +51,21 @@ def equilibrar(T_final, spins, adx, q):
 
 
 def simular(T, spins, adx):
-    t = [] #vector con pasos temporais
-    gspins = [] #vector coas configuracións do sistema
-
-    pasos = 1000 #pasos de simulación
+    mprom = 0
+    m2prom = 0
+    eprom = 0
+    e2prom = 0
+    pasos = 10000 #pasos de simulación
     g=20 #distancia entre valores de m
     for i in range(pasos*N*N):
         spins=metropolis(spins, adx, k, T, J)
 
         if i%(g*N*N)==0:
-            gspins.append(spins.copy())
-            t.append(i)
+            e = enerxia_total(spins, adx, J=1)
+            eprom = eprom + e
+            e2prom = e2prom + e*e
+            m = magnetizacion(spins, adx, J=1)
+            mprom = mprom + m
+            m2prom = m2prom + m*m
             print(i/(g*N*N))
-    t=np.array(t)/t[-1]
-    gardar_spins(gspins, f'spins_{T:.1f}.npz')
-    np.savetxt(f"tempo_{T:.1f}.npz", t, delimiter=",")
-    return None
+    return eprom/(pasos/g), e2prom/(pasos/g), mprom/(pasos/g), m2prom/(pasos/g)

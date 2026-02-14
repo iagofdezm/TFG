@@ -2,11 +2,11 @@ import numpy as np
 from lectura_datos import ler_adx, ler_spins
 from enerxias import magnetizacion
 import matplotlib.pyplot as plt
+from principal import temperaturas
 
 
 adx = ler_adx('adx.npz')
 
-temperaturas=np.linspace(0.001, 3, 5)
 
 ms = {}
 
