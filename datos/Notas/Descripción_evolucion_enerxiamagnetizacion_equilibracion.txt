@@ -1,5 +1,5 @@
 As gráficas da evolución da enerxía e a magnetización na equilibración foron obtidas coa función 'equilibrar' simulando 10000 pasos e reducindo a temperatura un 3% cada 20 pasos.
 
-A temperatura final, no caso de menor temperatura, acádase no paso 273.
+A temperatura final, no caso de menor temperatura, acádase no paso 5460 da simulación.
 
 

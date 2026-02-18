@@ -1,27 +1,34 @@
 from simulacion import equilibrar, simular
 from lectura_datos import ler_spins, ler_adx
 import numpy as np
+import os
 
-adx=ler_adx('datos\\q2\\adx.npz')
 
-temperaturas=np.linspace(0.001, 3, 50)
+temperaturas=np.linspace(0.002, 3, 50)
+temperaturas = np.round(temperaturas, 4)
 
-eprom = []
-e2prom = []
-mprom = []
-m2prom = []
+ruta = os.path.join('datos', 'q2')
+
+ruta_adx = os.path.join(ruta, 'adx.npz')
+adx = ler_adx(ruta_adx)
 
 for T in temperaturas:
-    spins=ler_spins(f'datos\\q2\\configuracion_equilibrada_{T:.4f}.npz')
-    v = simular(T, spins, adx)
-    eprom.append(v[0])
-    e2prom.append(v[1])
-    mprom.append(v[2])
-    m2prom.append(v[3])
-    print(f'Simulación rematada para T={T:.1f}')
+    '''
+    #Equilibrar
+    ruta_spins = os.path.join(ruta, f'configuracion_equilibrada_{T}.npy')
+    spins=np.load(ruta_spins)
+    equilibrar(T, spins, adx, ruta)
+    '''
 
-g=20
-pasos=5000
-#t = np.linspace(0, pasos, int(pasos/g))
-#np.savetxt('datos\\q2\\tempo', t, delimeter=',')
-np.savetxt('datos\\q2\\temperaturas', temperaturas)
+    '''
+    #Simular
+    ruta_spins = os.path.join(ruta, f'configuracion_equilibrada_{T}.npy')
+    spins=np.load(ruta_spins)
+    simular(T, spins, adx, ruta)
+    
+    print(f'Simulación rematada para T={T}')
+    '''
+#Gardado das temperaturas
+np.savetxt(ruta, temperaturas)
+
+

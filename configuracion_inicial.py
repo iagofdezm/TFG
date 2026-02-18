@@ -7,6 +7,7 @@ N=50
 #Posibles estados de spin
 k=[]
 q=2
+ruta = 'datos\\q2'
 for i in range(q):
     k.append(2*np.pi*i/q)
 
@@ -38,10 +39,10 @@ def crea_adx(N):
 #Vector de adyacencia
 adx = crea_adx(N)
 
-ruta_spins = os.path.join('datos', f'q{q}', 'configuracion_inicial')
-ruta_adx = os.path.join('datos', f'q{q}', 'adx')
+ruta_spins = os.path.join(ruta, 'configuracion_inicial.npy')
+ruta_adx = os.path.join(ruta, 'adx')
 
 gardar_adx(adx, ruta_adx)
-gardar_spins(spins, ruta_spins)
+np.save(ruta_spins, spins)
 
 
