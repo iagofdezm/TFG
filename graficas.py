@@ -5,11 +5,9 @@ import pandas as pd
 
 plt.close('all')
 
-ruta = 'datos\\q2'
+ruta = os.path.join('datos', 'q2')
 
-
-
-temperaturas = np.loadtxt(f'{ruta}\\temperaturas')
+temperaturas = np.loadtxt(f'{ruta}\\temperaturas.npy')
 vm = np.loadtxt(f'{ruta}\\vm.csv')
 vm2 = np.loadtxt(f'{ruta}\\vm2.csv')
 ve = np.loadtxt(f'{ruta}\\ve.csv')

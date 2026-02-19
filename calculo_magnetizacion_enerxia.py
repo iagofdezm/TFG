@@ -2,11 +2,15 @@ import numpy as np
 import os
 from lectura_datos import ler_adx
 from enerxias import magnetizacion, enerxia_total
-from principal import temperaturas
 
 
-adx = ler_adx('adx.npz')
 ruta = os.path.join('datos', 'q2')
+
+ruta_adx = os.path.join(ruta, 'adx.npz')
+adx = ler_adx(ruta_adx)
+
+ruta_temperaturas = os.path.join(ruta, 'temperaturas.npy')
+temperaturas = np.loadtxt(ruta_temperaturas)
 
 vm= []
 vm2 = []
@@ -16,7 +20,7 @@ ve2 = []
 for T in temperaturas:
 
     ruta1 = os.path.join(ruta, f'T={T}', 'simulacion.npy')
-    simulacion = np.load(ruta)
+    simulacion = np.load(ruta1)
 
     mpro = 0
     m2pro = 0
@@ -31,7 +35,7 @@ for T in temperaturas:
         m2pro = m2pro + m2
         e = enerxia_total(simulacion[i], adx, J=1)
         epro = epro + e
-        e2 = e2 + e*e
+        e2 = e*e
         e2pro = e2pro + e2
     
     mpro = mpro/len(simulacion)
@@ -43,6 +47,8 @@ for T in temperaturas:
     vm2.append(m2pro)
     ve.append(epro)
     ve2.append(e2pro)
+
+    print(f'Cálculos rematados para T={T}')
 
 vm = np.array(vm)
 vm2 = np.array(vm2)

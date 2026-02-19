@@ -30,7 +30,7 @@ def equilibrar(T_final, spins, adx, ruta):
             enerxias.append(enerxia)
             
 
-            print(i/(g*N*N), '/', pasos)
+            print(i/(g*N*N), '/', pasos/g)
     
     
     # Crea a carpeta para simular á T dada
@@ -38,10 +38,10 @@ def equilibrar(T_final, spins, adx, ruta):
     os.makedirs(carpeta, exist_ok=True) 
 
 
-    arquivom = f"magnetizacion_equilibracion_{T}.npz"
+    arquivom = f"magnetizacion_equilibracion_{T}.npy"
     rutam =  os.path.join(carpeta, arquivom)
 
-    arquivoe = f"enerxia_equilibracion_{T}.npz"
+    arquivoe = f"enerxia_equilibracion_{T}.npy"
     rutae = os.path.join(carpeta, arquivoe)
     
     #Gardado da evolución da magnetización e da enerxía
@@ -65,7 +65,7 @@ def simular(T, spins, adx, ruta):
 
         if i%(g*N*N)==0:
             gspins.append(spins)
-            print(i/(g*N*N), '/500')
+            print(i/(g*N*N), '/', pasos/g)
 
     gspins = np.array(gspins)
     rutasim = os.path.join(ruta, f'T={T}', 'simulacion.npy')
