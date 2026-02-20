@@ -3,7 +3,7 @@ import os
 from lectura_datos import ler_adx
 from enerxias import magnetizacion, enerxia_total
 
-
+N = 50
 ruta = os.path.join('datos', 'q2')
 
 ruta_adx = os.path.join(ruta, 'adx.npz')
@@ -28,8 +28,8 @@ for T in temperaturas:
     e2pro = 0
 
     for i in range(len(simulacion)):
-        m = magnetizacion(simulacion[i], adx, J=1)
-        m = m[2]
+        mag = magnetizacion(simulacion[i], adx, J=1)
+        m = mag[2]
         mpro = mpro + m
         m2 = m*m
         m2pro = m2pro + m2
@@ -37,11 +37,12 @@ for T in temperaturas:
         epro = epro + e
         e2 = e*e
         e2pro = e2pro + e2
-    
-    mpro = mpro/len(simulacion)
-    m2pro = m2pro/len(simulacion)
-    epro = epro/len(simulacion)
-    e2pro = e2pro/len(simulacion)
+
+    l = len(simulacion)
+    mpro = mpro/l
+    m2pro = m2pro/l
+    epro = epro/l
+    e2pro = e2pro/l
 
     vm.append(mpro)
     vm2.append(m2pro)
@@ -55,7 +56,10 @@ vm2 = np.array(vm2)
 ve = np.array(ve)
 ve2 = np.array(ve2)
 
-#Gardado dos vectores de magnetizacións e enerxías
+#Cálculo da suceptibilidade
+susceptibilidade = N*(vm2-vm*vm)/temperaturas
+
+#Gardado dos vectores das magnitudes calculadas
 rutavm = os.path.join(ruta, 'vm.csv')
 np.savetxt(rutavm, vm)
 rutavm2 = os.path.join(ruta, 'vm2.csv')
@@ -64,6 +68,8 @@ rutave = os.path.join(ruta, 've.csv')
 np.savetxt(rutave, ve)
 rutave2 = os.path.join(ruta, 've2.csv')
 np.savetxt(rutave2, ve2)
+rutasusceptibilidade = os.path.join(ruta, 'susceptibilidade.csv')
+np.savetxt(rutasusceptibilidade, susceptibilidade)
 
 
 

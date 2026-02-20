@@ -15,5 +15,5 @@ def magnetizacion(spins, adx, J=1):
     N2 = len(spins)
     mx = np.sum(np.cos(spins))/N2
     my = np.sum(np.sin(spins))/N2
-    mtotal = np.sqrt(mx**2+my**2)
+    mtotal = np.sqrt(mx*mx+my*my)
     return mx, my, mtotal

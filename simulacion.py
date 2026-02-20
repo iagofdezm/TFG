@@ -2,6 +2,7 @@ import numpy as np
 import os
 import random as random
 from metropolis import metropolis
+from wolff import wolff
 from configuracion_inicial import N, k, J
 from enerxias import magnetizacion, enerxia_total
 
@@ -14,7 +15,9 @@ def equilibrar(T_final, spins, adx, ruta):
     pasos = 5000 #pasos de simulación
     g=20 #distancia entre valores de m
     for i in range(pasos*N*N):
-        spins=metropolis(spins, adx, k, T, J)
+        #spins=metropolis(spins, adx, k, T, J)
+        spins=wolff(spins, adx, T)
+        
         
         if i%(g*N*N)==0:
             
@@ -61,7 +64,8 @@ def simular(T, spins, adx, ruta):
     g = 20 #pasos de distancia entre configuraciones guardadas
     gspins = []
     for i in range(pasos*N*N):
-        spins=metropolis(spins, adx, k, T, J)
+        #spins=metropolis(spins, adx, k, T, J)
+        spins=wolff(spins, adx, T, J=1)
 
         if i%(g*N*N)==0:
             gspins.append(spins)
@@ -71,3 +75,8 @@ def simular(T, spins, adx, ruta):
     rutasim = os.path.join(ruta, f'T={T}', 'simulacion.npy')
     np.save(rutasim, gspins)
     return None
+
+
+
+
+

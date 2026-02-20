@@ -30,6 +30,7 @@ for T in temperaturas:
     
     print(f'Simulación rematada para T={T}')
     
+    
 #Gardado das temperaturas
 arquivo_temperaturas = os.path.join(ruta, 'temperaturas.npy')
 np.savetxt(arquivo_temperaturas, temperaturas)
