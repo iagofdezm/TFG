@@ -8,7 +8,7 @@ simulacion:
   frecuencia_medida: 20
   pasos_enfriamiento: 10000
   n_temperaturas_enfriamiento: 20
-  T_inicio_enfriamiento: 1.6
+  T_inicio_enfriamiento: 3
 
 parametros:
   J: 1.0
