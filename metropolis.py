@@ -1,39 +1,37 @@
 import numpy as np
-import random as random
 
-def metropolis(spins, adx, k, T, J):
-    #posicion do spin seleccionado
-    posicion = np.random.randint(0, len(spins))
-        
-    s = spins[posicion] #valor do spin seleccionado
-    vec = adx[posicion] #Posición dos veciños
+class Metropolis:
+    def __init__(self, rede, T):
+        self.rede = rede
+        self.T = T
+        self.beta = 1.0 / T
 
-    #Enerxía debido ó spin seleccionado
-    E=0
-    for j in vec:
-        E = E - J*np.cos(s-spins[j])
+    def paso(self):
+        """Un intento de actualización en un sitio aleatorio."""
+        idx = self.rede.posicion_aleatoria()
+        spin_vello = self.rede.spins[idx]
 
-    #Escollemos un novo valor de spin asegurándonos de que non se repita o valor sn=s
-    sn = s
-    while sn==s:
-        sn = random.choice(k) #valor novo do spin
+        # Elegir un nuevo estado distinto
+        q = self.rede.q
+        spin_novo = np.random.randint(0, q)
+        while spin_novo == spin_vello:
+            spin_novo = np.random.randint(0, q)
 
-    En = 0
-    for j in vec:
-        En = En - J*np.cos(sn-spins[j])
+        # Energía antes y después
+        E_vella = self.rede.enerxia_local(idx)
 
-    deltaE = En-E #variación da enerxía
+        # Probar el cambio
+        self.rede.spins[idx] = spin_novo
+        E_nova = self.rede.enerxia_local(idx)
 
-    if deltaE<0:
-        spins[posicion] = sn
-    elif np.exp(-deltaE/T)>random.random():
-        spins[posicion] = sn
-    return spins
+        delta_E = E_nova - E_vella
 
+        # Regla de aceptación
+        if delta_E > 0 and np.random.rand() >= np.exp(-self.beta * delta_E):
+            # Rechazar: volver al estado anterior
+            self.rede.spins[idx] = spin_vello
 
-
-
-
-
-
-
+    def barrido(self):
+        """Un barrido completo: N intentos."""
+        for _ in range(self.rede.N):
+            self.paso()
